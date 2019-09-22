@@ -3,32 +3,41 @@ import PropTypes from 'prop-types';
 
 const Table = props => {
 
-    let data = [{
-        _id: 'qweqwe23123',
-        name: 'name',
-    }];
-    
-    const tableBody = () => {
-        props.datas.map(data => {
-            return props.dataCount > 0 ? (
-                <tr>{
-                    data.map(col => <td>{col}</td>)
-                }</tr>
-            ) :
-            (
-                <tr>
-                    <td className="text-center" colSpan={tableHeader.length}></td>
-                </tr>
+    const tableBody = props.datas.length > 0 ? props.datas.map(data => 
+    <tr key={data}>
+        {
+            Object.keys(data).map(col => 
+                <td key={col}>
+                    {data[col]}
+                </td>
             )
-        });
-    };
+        }
+        {
+            props.view || props.remove ?
+            <td>
+                {props.view ? <button onClick={props.viewClickAction}>View</button> : null}
+                {props.remove ? <button onClick={props.removeClickAction}>Remove</button> : null}
+            </td>
+            : null
+        }
+    </tr>
+    ) : 
+    (
+        <tr>
+            <td colSpan={props.tableheader.length} className="text-center">{props.emptymessage}</td>
+        </tr>
+    );
 
-    const tableHeader = () => {
-        props.tableHeader.map(header => <th>{header}</th>)
-    }
+    const tableHeader = props.tableheader.length > 0 ? 
+        props.tableheader.map(header => 
+            <th>{header}</th>
+        ) : 
+        Object.keys(props.datas[0]).map(dataKey => 
+            <th>{dataKey}</th>
+        );
 
     return (
-        <table>
+        <table {...props}>
             <thead>
                 {tableHeader}
             </thead>
@@ -41,29 +50,37 @@ const Table = props => {
 
 Table.propTypes = {
     className: PropTypes.string,
-    dark: PropTypes.bool,
+    dark: PropTypes.string,
     cellPadding: PropTypes.string,
     cellSpacing: PropTypes.string,
     border: PropTypes.string,
     width: PropTypes.string,
     actions: PropTypes.array,
     datas: PropTypes.array,
-    emptyMessage: PropTypes.string,
-    tableHeader: PropTypes.array,
-    dataCount: PropTypes.number
+    emptymessage: PropTypes.string,
+    tableheader: PropTypes.array,
+    datacount: PropTypes.number,
+    view: PropTypes.bool,
+    remove: PropTypes.bool,
+    viewClickAction: PropTypes.string,
+    removeClickAction: PropTypes.string,
 }
 
 Table.defaultProps = {
     className: "table table-striped table-hover table-bordered",
-    dark: false,
+    dark: "false",
     cellPadding: "0",
     cellSpacing: "0",
     border: "0",
     width: "100%",
     datas: [],
-    emptyMessage: "No data Found!",
-    tableHeader: [],
-    dataCount: PropTypes.datas.length > 0 ? PropTypes.datas.length : 0
+    emptymessage: "No data Found!",
+    tableheader: [],
+    datacount: 0,
+    view: false,
+    remove: false,
+    viewClickAction: 'viewAction',
+    removeClickAction: 'removeAction'
 }
 
 export default Table;
