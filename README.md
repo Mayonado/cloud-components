@@ -4,7 +4,7 @@
 
 first, install cloud panda components using node package manager(npm) # > npm i cloud-panda-components
 
-## Validations
+### Validations
 | Validation |                      Description                            |
 | ---------- | ----------------------------------------------------------: |
 | required   | Used to validate empty fields                               |
@@ -20,38 +20,38 @@ You will passed validations as props on cloud-panda-components
   
 ## Example Code:
 
-# required
+#### required
 <Input validations={{required: true}} />
 
-# maxLength
-# <Input validations={{maxLength: { value: 10 }}} />
+#### maxLength
+### <Input validations={{maxLength: { value: 10 }}} />
 -- The value 10 is for character limit of input value
 
-# minLength
+#### minLength
 # <Input validations={{minLength: { value: 6 }}} />
 -- The value 6 is for character minimum character of input value
 
-# isEmail
-# <Input validations={{isEmail: true}} />
+#### isEmail
+ <Input validations={{isEmail: true}} />
 
-# isNumeric
-# <Input validations={{isNumeric: { value: 10 }}} />
+#### isNumeric
+ <Input validations={{isNumeric: { value: 10 }}} />
 
-# custom
-# <Input validations={{custom: { rules: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ }}} />
+#### custom
+ <Input validations={{custom: { rules: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ }}} />
 -- You can set your own validations with the use of regular expression
 
-## Note: You can customize your own error message for each validations.
+### Note: You can customize your own error message for each validations.
 
-# Example Code with custom error message
+### Example Code with custom error message
 
-# <Input validations={{required: {message: 'This fields is empty'}}} />
-# <Input validations={{maxLength: { value: 10, message: 'Maximum Length exceeded' }}} />
-# <Input validations={{minLenght: { value: 10, message: 'The value must more 10 characters' }}} />
+ <Input validations={{required: {message: 'This fields is empty'}}} />
+ <Input validations={{maxLength: { value: 10, message: 'Maximum Length exceeded' }}} />
+ <Input validations={{minLenght: { value: 10, message: 'The value must more 10 characters' }}} />
 
-## Another Note: Each validations has its own default error message, so it's okay to not set it if you want.
+#### Another Note: Each validations has its own default error message, so it's okay to not set it if you want.
 
-## Props
+### Props
 |       Props      |                          Description                                     |
 | ---------------- | -----------------------------------------------------------------------: |
 | label            | Text of label, default: "No Label"                                       |
