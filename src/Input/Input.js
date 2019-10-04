@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 
+// variable to check if the user was touch the input field.
 let touched = false;
 
 const InputComponents = props => {
