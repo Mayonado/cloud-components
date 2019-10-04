@@ -1,6 +1,6 @@
 ### Cloud Panda Components
   #### Description: 
-    It is a reusable react components that performs some functionalities.
+    It is a reusable react components.
 
 first, install cloud panda components using node package manager(npm) #### > npm i cloud-panda-components
 
