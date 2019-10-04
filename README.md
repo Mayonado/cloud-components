@@ -1,12 +1,12 @@
 ### Cloud Panda Components
-  #Description: 
+  #### Description: 
     It is a reusable react components that performs some functionalities.
 
-first, install cloud panda components using node package manager(npm) # > npm i cloud-panda-components
+first, install cloud panda components using node package manager(npm) #### > npm i cloud-panda-components
 
 ### Validations
 | Validation |                      Description                            |
-| ---------- | ----------------------------------------------------------: |
+| ---------- | ----------------------------------------------------------- |
 | required   | Used to validate empty fields                               |
 | maxLength  | It is used to validate the maximum characters of the fields |
 | minLength  | It is used to validate the minimum characters of the fields |
@@ -24,11 +24,11 @@ You will passed validations as props on cloud-panda-components
 <Input validations={{required: true}} />
 
 #### maxLength
-### <Input validations={{maxLength: { value: 10 }}} />
+ <Input validations={{maxLength: { value: 10 }}} />
 -- The value 10 is for character limit of input value
 
 #### minLength
-# <Input validations={{minLength: { value: 6 }}} />
+ <Input validations={{minLength: { value: 6 }}} />
 -- The value 6 is for character minimum character of input value
 
 #### isEmail
@@ -53,7 +53,7 @@ You will passed validations as props on cloud-panda-components
 
 ### Props
 |       Props      |                          Description                                     |
-| ---------------- | -----------------------------------------------------------------------: |
+| ---------------- | ------------------------------------------------------------------------ |
 | label            | Text of label, default: "No Label"                                       |
 | containerClass   | It refers to the container of input and label, default: "form-group"     |
 | inputProps       | refering to the props of input e.g(placeholder, type)                    |
