@@ -5,6 +5,8 @@ import propTypes from 'prop-types';
 let touched = false;
 
 const InputComponents = props => {
+    // state for touched(text fields touched)
+
     // error element - null as initial value
     let element = null;
 
@@ -14,92 +16,214 @@ const InputComponents = props => {
         let isValid = true;
         // if props.validations is exists and touched state is set to true
         if(props.validations && touched) {
+            
+            // storing validation object in variable
+            const validations = props.validations;
             // validations for required fields
-            if(props.validations.required && isValid) {
+            if(validations.required && isValid) {
 
                 // check value if empty(white space is not included)
                 isValid = props.inputProps.value.trim() !== '';
 
                 // assign error element
                 element = ( 
+                    !isValid ? 
                     <p className="error-message">
                         {
-                            props.validations.required ? 
-                            props.validations.required.message : 'This field is required.'
+                            validations.required ? 
+                            validations.required.message : 'This field is required.'
                         }
-                    </p>
+                    </p> :
+                    null
                 );
             }
 
             // validation for maximum length of characters
-            if(props.validations.maxLength && isValid) {
-                isValid = props.inputProps.value.length <= props.validations.maxLength.value;
+            if(validations.maxLength && isValid) {
+                isValid = props.inputProps.value.length <= validations.maxLength.value;
                 element = (
+                    !isValid ? 
                     <p className="error-message">
                         {
-                            props.validations.maxLength && props.validations.maxLength.message ? 
-                            props.validations.maxLength.message : `The value must be less than ${props.validations.maxLength.value}.`
+                            validations.maxLength && validations.maxLength.message ? 
+                            validations.maxLength.message : `The value must be less than ${validations.maxLength.value}.`
                         }
-                    </p>
+                    </p> :
+                    null
                 );
             }
 
             // validations for minimum length of characters
-            if(props.validations.minLength && isValid) {
-                isValid = props.inputProps.value.length >= props.validations.minLength.value;
+            if(validations.minLength && isValid) {
+                isValid = props.inputProps.value.length >= validations.minLength.value;
                 element = (
+                    !isValid ? 
                     <p className="error-message">
                         {
-                            props.validations.minLength && props.validations.maxLength.message ? 
-                            props.validations.minLength.message : `The value must be more than ${props.validations.minLength.value}.`
+                            validations.minLength && validations.maxLength.message ? 
+                            validations.minLength.message : `The value must be more than ${validations.minLength.value}.`
                         }
-                    </p>
+                    </p> : 
+                    null
                 );
             } 
 
             // validations for valid email address
-            if(props.validations.isEmail && isValid) {
+            if(validations.isEmail && isValid) {
                 // valid email address pattern(regular expression)
                 const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
                 // testing pattern
                 isValid = pattern.test( props.inputProps.value );
                 element = (
+                    !isValid ? 
                     <p className="error-message">
                         {
-                            props.validations.isEmail && props.validations.isEmail.message ? 
-                            props.validations.isEmail.message : `The value must be a valid email address.`
+                            validations.isEmail && validations.isEmail.message ? 
+                            validations.isEmail.message : `The value must be a valid email address.`
                         }
-                    </p>
+                    </p> :
+                    null
                 );
             }
 
             // validations for numeric, checking of value if number
-            if(props.validations.isNumeric && isValid) {
+            if(validations.isNumeric && isValid) {
                 const pattern = /^[0-9]\d*(\.\d+)?$/;
                 isValid = pattern.test( props.inputProps.value );
                 element = (
+                    !isValid ? 
                     <p className="error-message">
                         {
-                            props.validations.isNumeric && props.validations.isNumeric.message ? 
-                            props.validations.isNumeric.message : `The value must be numeric.`
+                            validations.isNumeric && validations.isNumeric.message ? 
+                            validations.isNumeric.message : `The value must be numeric.`
                         }
-                    </p>
+                    </p> :
+                    null
                 );
             }
 
             // custom validations with rules using regular expression
-            if(props.validations.custom && props.validations.custom.rules && isValid) {
+            if(validations.custom && validations.custom.rules && isValid) {
                 // check if other rules is valid
-                isValid = props.validations.custom.rules.test( props.inputProps.value );
+                isValid = validations.custom.rules.test( props.inputProps.value );
                 // replacing error element
                 element = (
+                    !isValid ? 
                     <p className="error-message">
                         {
-                            props.validations.custom && props.validations.custom.message ? 
-                            props.validations.custom.message : `The value is invalid.`
+                            validations.custom && validations.custom.message ? 
+                            validations.custom.message : `The value is invalid.`
                         }
-                    </p>
+                    </p> :
+                    null
                 );
+            }
+
+            if(validations.sameWith && isValid) {
+                isValid = props.inputProps.value === validations.sameWith.value;
+
+                element = (
+                    !isValid ? 
+                    <p className="error-message">
+                        {
+                            validations.sameWith && validations.sameWith.message ? 
+                            validations.sameWith.message : `The two fields are not the same.`
+                        }
+                    </p> :
+                    null
+                ); 
+            }
+
+            if(validations.alpha && isValid) {
+                // alphabet only format
+                isValid = /^[a-zA-Z]+$/.test(props.inputProps.value);
+
+                element = (
+                    !isValid ? 
+                    <p className="error-message">
+                        {
+                            validations.alpha && validations.alpha.message ? 
+                            validations.alpha.message : `The value must be alphabet only.`
+                        }
+                    </p> :
+                    null
+                ); 
+            }
+
+            if(validations.alphaNum && isValid) {
+
+                // check if valid alpha numeric
+                isValid = /^[a-zA-Z0-9]+$/.test(props.inputProps.value);
+
+                element = (
+                    !isValid ? 
+                    <p className="error-message">
+                        {
+                            validations.alphaNum && validations.alphaNum.message ? 
+                            validations.alphaNum.message : `The value must be alpha numeric only.`
+                        }
+                    </p> :
+                    null
+                ); 
+            }
+
+            if(validations.isArray && isValid) {
+
+                // check if value is valid array
+                isValid = Array.isArray(props.inputProps.value);
+
+                element = (
+                    !isValid ? 
+                    <p className="error-message">
+                        {
+                            validations.array && validations.array.message ? 
+                            validations.array.message : `The value must be a valid array.`
+                        }
+                    </p> :
+                    null
+                );
+            }
+
+            if(validations.file && isValid) {
+
+                const fileValue = validations.file.file;
+
+                // validation for file extensions
+                if(validations.file && validations.file.ext) {
+                    // docx|doc|pdf|xml|bmp|ppt|xls
+                    const fileFormat = new RegExp(`(.*?)\.(${validations.file.ext})$`);
+                    // check if value is valid array
+                    isValid = fileFormat.test(fileValue.name.toLowerCase());
+
+                    element = (
+                        !isValid ? 
+                        <p className="error-message">
+                            {
+                                validations.array && validations.array.message ? 
+                                validations.array.message : `The file must be a file type: ${validations.file.ext}.`
+                            }
+                        </p> :
+                        null
+                    );
+                }
+                
+                // validation for file extensions
+                if(validations.file && validations.file.maxSize && isValid) {
+                    const val = fileValue.size;
+                    // check if value is valid array
+                    isValid = validations.file.maxSize > val;
+
+                    element = (
+                        !isValid ? 
+                        <p className="error-message">
+                            {
+                                validations.array && validations.array.message ? 
+                                validations.array.message : `The filesize exceed the maximum required size.`
+                            }
+                        </p> :
+                        null
+                    );
+                }
             }
         }
     }
@@ -107,7 +231,9 @@ const InputComponents = props => {
     const onChangeFunc = (e) => {
 
         // return onChange function made by users
-        props.onChange(e);
+        if(props && props.hasOwnProperty('onChange')) {
+            props.onChange(e);
+        }
 
         // set touched to true if user typed on input
         touched = true;
@@ -133,11 +259,11 @@ InputComponents.propTypes = {
     inputClass: propTypes.string,   // class for input type separate to make it dynamic
     onSubmitValidation: propTypes.bool,  // if set to true validations will on submitting event, if set to false the validation is on change of the input type, default is true,
     onChange: propTypes.func,        // input type on change function
-    formValid: propTypes.bool       // true or false if onSubmitValidation set to true invalid must be pass on form submit, default is true.
+    validate: propTypes.bool       // if set to false the validation will disable, default is true
 }
 
 InputComponents.defaultProps = {
-    label: 'Empty Label',
+    label: 'No Label',
     containerClass: 'form-group',
     inputProps: {
         placeholder: 'Form Input',

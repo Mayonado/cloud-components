@@ -1,68 +1,69 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Cloud Panda Components
+  #### Description: 
+    It is a reusable react components that performs some functionalities.
 
-## Available Scripts
+first, install cloud panda components using node package manager(npm) #### > npm i cloud-panda-components
 
-In the project directory, you can run:
+### Validations
+| Validation |                      Description                            |
+| ---------- | ----------------------------------------------------------- |
+| required   | Used to validate empty fields                               |
+| maxLength  | It is used to validate the maximum characters of the fields |
+| minLength  | It is used to validate the minimum characters of the fields |
+| isEmail    | It used to check if the email is valid                      |
+| isNumeric  | Used to check if the value is numeric                       |
+| custom     | Custom validation that uses regular expression/pattern      |
 
-### `npm start`
+You will passed validations as props on cloud-panda-components
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to use Validations!
+  
+## Example Code:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+#### required
+<Input validations={{required: true}} />
 
-### `npm test`
+#### maxLength
+ <Input validations={{maxLength: { value: 10 }}} />
+-- The value 10 is for character limit of input value
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### minLength
+ <Input validations={{minLength: { value: 6 }}} />
+-- The value 6 is for character minimum character of input value
 
-### `npm run build`
+#### isEmail
+ <Input validations={{isEmail: true}} />
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### isNumeric
+ <Input validations={{isNumeric: { value: 10 }}} />
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+#### custom
+ <Input validations={{custom: { rules: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ }}} />
+-- You can set your own validations with the use of regular expression
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Note: You can customize your own error message for each validations.
 
-### `npm run eject`
+### Example Code with custom error message
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ <Input validations={{required: {message: 'This fields is empty'}}} />
+ <Input validations={{maxLength: { value: 10, message: 'Maximum Length exceeded' }}} />
+ <Input validations={{minLenght: { value: 10, message: 'The value must more 10 characters' }}} />
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Another Note: Each validations has its own default error message, so it's okay to not set it if you want.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Props
+|       Props      |                          Description                                     |
+| ---------------- | ------------------------------------------------------------------------ |
+| label            | Text of label, default: "No Label"                                       |
+| containerClass   | It refers to the container of input and label, default: "form-group"     |
+| inputProps       | refering to the props of input e.g(placeholder, type)                    |
+| labelProps       | It refers to the properties of label e.g(for, className)                 |
+| validations      | Object property that contains the validations                            |
+| onChange         | It returns your function on onChange event of the input                  |
+| formValid        | When set to false, the input will not validated. default: true           |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
