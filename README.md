@@ -36,7 +36,7 @@ You will passed validations as props on cloud-panda-components
  <Input validations={{isEmail: true}} />
 
 #### isNumeric
- <Input validations={{isNumeric: { value: 10 }}} />
+ <Input validations={{isNumeric: true}} />
 
 #### custom
  <Input validations={{custom: { rules: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ }}} />
