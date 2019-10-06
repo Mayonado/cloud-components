@@ -5,14 +5,20 @@
 first, install cloud panda components using node package manager(npm) #### > npm i cloud-panda-components
 
 ### Validations
-| Validation |                      Description                            |
-| ---------- | ----------------------------------------------------------- |
-| required   | Validates that the value must not be empty.                 |
-| maxLength  | It is used to validate the maximum characters of the fields |
-| minLength  | It is used to validate the minimum characters of the fields |
-| isEmail    | Validates that a value is a valid email address.            |
-| isNumeric  | Validates that the value is only a number.                  |
-| custom     | Custom validation that uses regular expression/pattern      |
+| Validation        |                      Description                                 |
+| ----------------- | ---------------------------------------------------------------- |
+| required          | Validates that the value must not be empty.                      |
+| maxLength         | It is used to validate the maximum characters of the fields      |
+| minLength         | It is used to validate the minimum characters of the fields      |
+| isEmail           | Validates that a value is a valid email address.                 |
+| isNumeric         | Validates that the value is only a number.                       |
+| alpha             | Alphabet only validation .                                       |
+| alphaNum          | Validates alpha numeric string value.                            |
+| sameWith          | The given field must match the value you passed under validation |
+| isArray           | The value must be a valid array                                  |
+| file{maxSize}     | Validates the maximum filesize of the given file                 |
+| file{extension}   | Validates the allowed file types of the given file               |
+| custom            | Custom validation that uses regular expression/pattern           |
 
 ## How to use Validations!
   
