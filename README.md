@@ -7,49 +7,179 @@ first, install cloud panda components using node package manager(npm) #### > npm
 ### Validations
 | Validation |                      Description                            |
 | ---------- | ----------------------------------------------------------- |
-| required   | Used to validate empty fields                               |
+| required   | Validates that the value must not be empty.                 |
 | maxLength  | It is used to validate the maximum characters of the fields |
 | minLength  | It is used to validate the minimum characters of the fields |
-| isEmail    | It used to check if the email is valid                      |
-| isNumeric  | Used to check if the value is numeric                       |
+| isEmail    | Validates that a value is a valid email address.            |
+| isNumeric  | Validates that the value is only a number.                  |
 | custom     | Custom validation that uses regular expression/pattern      |
-
-You will passed validations as props on cloud-panda-components
 
 ## How to use Validations!
   
 ## Example Code:
 
 #### required
-<Input validations={{required: true}} />
+<Input 
+    validations={
+        {
+            required: true
+        }
+    }
+/>
+-- Required
 
 #### maxLength
- <Input validations={{maxLength: { value: 10 }}} />
--- The value 10 is for character limit of input value
+ <Input 
+    validations={
+        {
+            maxLength: 
+            {
+                value: 10
+            }
+        }
+    }
+/>
+-- Limit the maximum length of the input fields
 
 #### minLength
- <Input validations={{minLength: { value: 6 }}} />
--- The value 6 is for character minimum character of input value
+ <Input 
+    validations={
+        {
+            minLength: 
+            { 
+                value: 6
+            }
+        }
+    } 
+/>
+-- Minimum character length
 
 #### isEmail
- <Input validations={{isEmail: true}} />
+ <Input 
+    validations={
+        {
+            isEmail: true
+        }
+    } 
+ />
 
 #### isNumeric
- <Input validations={{isNumeric: { value: 10 }}} />
+ <Input 
+    validations={
+        {
+            isNumeric: 
+            { 
+                value: 10 
+            }
+        }
+    }
+/>
+ -- Valid numbers only
+
+ #### isNumeric
+ <Input 
+    validations={
+        {
+            alpha: true
+        }
+    }
+/>
+ -- Alphabet only
+ 
+#### sameWith 
+ <Input 
+    validations={
+        {
+            sameWith: { value: 'Pass123' }
+        }
+    }
+/>
+
+ #### alphaNum 
+ <Input 
+    validations={
+        {
+            alphaNum: true
+        }
+    } 
+/>
+-- For Alpha Numeric Validations
+
+#### isArray 
+ <Input 
+    validations={
+        {
+            sameWith: {isArray: ['Mangos', 'Apple'] }
+        }
+    }
+/>
+ -- Valid array value only.
+
+#### file{maxSize} 
+ <Input 
+    validations={
+        {
+            file: { maxSize: 2000 }
+        }
+    }
+/>
+ -- Validate maximum size of file.
+ 
+ #### file{Extension} 
+ <Input 
+    validations={
+        {
+            file: 
+            { 
+                ext: 'docx|png|jpg|jpeg' 
+            }
+        }
+    } 
+/>
+ -- Validate allowed extensions for file.
 
 #### custom
- <Input validations={{custom: { rules: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ }}} />
+ <Input validations={
+     {
+         custom: 
+            { 
+                rules: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ 
+            }
+        }
+    } 
+/>
 -- You can set your own validations with the use of regular expression
 
-### Note: You can customize your own error message for each validations.
+### You can customize your own error message for each validations.
 
 ### Example Code with custom error message
 
- <Input validations={{required: {message: 'This fields is empty'}}} />
- <Input validations={{maxLength: { value: 10, message: 'Maximum Length exceeded' }}} />
- <Input validations={{minLenght: { value: 10, message: 'The value must more 10 characters' }}} />
+ <Input 
+    validations={
+        {
+            required: {message: 'This fields is empty'}
+        }
+    } 
+ />
+ <Input 
+    validations={
+        {
+            maxLength: { value: 10, message: 'Maximum Length exceeded' }
+        }
+    } 
+ />
 
-#### Another Note: Each validations has its own default error message, so it's okay to not set it if you want.
+ #### Multiple validations
+ <Input 
+    validations={
+        {
+            required: {message: "This is a required field."},
+            isNumeric: {message: 'A valid number value is required.'}
+        }
+    } 
+ />
+
+#### Note: Each validations has its own default error message, so it's okay to not set it if you want.
 
 ### Props
 |       Props      |                          Description                                     |

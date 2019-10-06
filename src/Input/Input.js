@@ -2,7 +2,8 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 
-let touched = false;
+// input elements that is touched
+let inputElement = [];
 
 const InputComponents = props => {
     // state for touched(text fields touched)
@@ -15,7 +16,7 @@ const InputComponents = props => {
         //  set variable that state the validity
         let isValid = true;
         // if props.validations is exists and touched state is set to true
-        if(props.validations && touched) {
+        if(props.validations && inputElement.length > 0) {
             
             // storing validation object in variable
             const validations = props.validations;
@@ -30,7 +31,7 @@ const InputComponents = props => {
                     !isValid ? 
                     <p className="error-message">
                         {
-                            validations.required ? 
+                            validations.required && validations.required.message ? 
                             validations.required.message : 'This field is required.'
                         }
                     </p> :
@@ -46,7 +47,7 @@ const InputComponents = props => {
                     <p className="error-message">
                         {
                             validations.maxLength && validations.maxLength.message ? 
-                            validations.maxLength.message : `The value must be less than ${validations.maxLength.value}.`
+                            validations.maxLength.message : `The value must be more than ${validations.maxLength.value}.`
                         }
                     </p> :
                     null
@@ -61,7 +62,7 @@ const InputComponents = props => {
                     <p className="error-message">
                         {
                             validations.minLength && validations.maxLength.message ? 
-                            validations.minLength.message : `The value must be more than ${validations.minLength.value}.`
+                            validations.minLength.message : `The value must be less than ${validations.minLength.value}.`
                         }
                     </p> : 
                     null
@@ -235,8 +236,10 @@ const InputComponents = props => {
             props.onChange(e);
         }
 
-        // set touched to true if user typed on input
-        touched = true;
+        // setting input element
+        if(!inputElement.includes(e.target.name)) {
+            inputElement.push(e.target.name);
+        }
     }
 
     // returns component to view
@@ -244,8 +247,8 @@ const InputComponents = props => {
         // set form field container
         <div className={props.containerClass}>
             <label {...props.labelProps}>{props.label}</label>
-            <input {...props.inputProps} className={props.inputClass.concat(element ? ' input-error' : '')} onChange={(e) => onChangeFunc(e)} />
-            {element}
+            <input {...props.inputProps} className={props.inputClass} style={element && inputElement.includes(props.inputProps.name) ? {borderColor: '#dc3545'} : null} onChange={(e) => onChangeFunc(e)} />
+            {inputElement.includes(props.inputProps.name) ? element : null}
         </div>
     );
 }
@@ -271,7 +274,7 @@ InputComponents.defaultProps = {
     },
     inputClass: 'form-control',
     validations: {},
-    validate: true
+    validate: true,
 }
 
 export default InputComponents;
