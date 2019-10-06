@@ -190,7 +190,7 @@ first, install cloud panda components using node package manager(npm) #### > npm
 | labelProps       | It refers to the properties of label e.g(for, className)                 |
 | validations      | Object property that contains the validations                            |
 | onChange         | It returns your function on onChange event of the input                  |
-| formValid        | When set to false, the input will not validated. default: true           |
+| validate         | When set to false, the input will not validate. default: true            |
 
 
 
