@@ -177,8 +177,8 @@ const InputComponents = props => {
                     !isValid ? 
                     <p className="error-message">
                         {
-                            validations.array && validations.array.message ? 
-                            validations.array.message : `The value must be a valid array.`
+                            validations.isArray && validations.isArray.message ? 
+                            validations.isArray.message : `The value must be a valid array.`
                         }
                     </p> :
                     null
