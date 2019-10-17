@@ -187,6 +187,7 @@ first, install cloud panda components using node package manager(npm) #### > npm
 
 #### Note: Each validations has its own default error message, so it's okay to not set it if you want.
 
+
 ### Props
 |       Props      |                          Description                                     |
 | ---------------- | ------------------------------------------------------------------------ |
@@ -197,6 +198,9 @@ first, install cloud panda components using node package manager(npm) #### > npm
 | validations      | Object property that contains the validations                            |
 | onChange         | It returns your function on onChange event of the input                  |
 | validate         | When set to false, the input will not validate. default: true            |
+
+### Important Note: 
+    required name properties on inputProps
 
 
 

@@ -4,20 +4,24 @@ import propTypes from 'prop-types';
 
 // input elements that is touched
 let inputElement = [];
-
 const InputComponents = props => {
     // state for touched(text fields touched)
 
     // error element - null as initial value
     let element = null;
 
+    if(props.touched && !inputElement.includes(props.inputProps.name)) {
+        inputElement.push(props.inputProps.name);
+    }
+    
     // check if validation props is set to true
     if(props.validate) {
         //  set variable that state the validity
         let isValid = true;
         // if props.validations is exists and touched state is set to true
-        if(props.validations && inputElement.length > 0) {
+        if((props.validations && inputElement.length > 0) || (props.validations && props.touched)) {
             
+
             // storing validation object in variable
             const validations = props.validations;
             // validations for required fields
@@ -47,7 +51,7 @@ const InputComponents = props => {
                     <p className="error-message">
                         {
                             validations.maxLength && validations.maxLength.message ? 
-                            validations.maxLength.message : `The value must be more than ${validations.maxLength.value}.`
+                            validations.maxLength.message : `The value must be less than ${validations.maxLength.value}.`
                         }
                     </p> :
                     null
@@ -227,10 +231,20 @@ const InputComponents = props => {
                 }
             }
         }
+
+        if(inputElement.includes(props.inputProps.name) && props.inputProps.value.trim() !== "") {
+            // inputElement.splice(props.inputProps.name, 1);
+            const index = inputElement.indexOf(props.inputProps.name);
+            inputElement.splice(index, 1);
+        }
+    }
+
+    InputComponents.valid = false;
+    if(props.touched) {
+        InputComponents.valid = !inputElement.length > 0;
     }
 
     const onChangeFunc = (e) => {
-
         // return onChange function made by users
         if(props && props.hasOwnProperty('onChange')) {
             props.onChange(e);
@@ -239,6 +253,11 @@ const InputComponents = props => {
         // setting input element
         if(!inputElement.includes(e.target.name)) {
             inputElement.push(e.target.name);
+        }
+
+        if(inputElement.includes(props.inputProps.name) && e.target.value.trim() !== "") {
+            const index = inputElement.indexOf(props.inputProps.name);
+            inputElement.splice(index, 1);
         }
     }
 
@@ -262,7 +281,8 @@ InputComponents.propTypes = {
     inputClass: propTypes.string,   // class for input type separate to make it dynamic
     onSubmitValidation: propTypes.bool,  // if set to true validations will on submitting event, if set to false the validation is on change of the input type, default is true,
     onChange: propTypes.func,        // input type on change function
-    validate: propTypes.bool       // if set to false the validation will disable, default is true
+    validate: propTypes.bool,       // if set to false the validation will disable, default is true
+    touched: propTypes.bool
 }
 
 InputComponents.defaultProps = {
@@ -270,11 +290,13 @@ InputComponents.defaultProps = {
     containerClass: 'form-group',
     inputProps: {
         placeholder: 'Form Input',
-        type: 'text'
+        type: 'text',
+        value: ''
     },
     inputClass: 'form-control',
     validations: {},
     validate: true,
+    touched: false
 }
 
 export default InputComponents;
