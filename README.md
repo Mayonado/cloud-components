@@ -1,6 +1,6 @@
-### Cloud Panda Components
+### Panda Validator
   #### Description: 
-    React Reusable Components.
+    Is a form validator for react apps.
 
 first, install cloud panda components using node package manager(npm) #### > npm i cloud-panda-components
 
